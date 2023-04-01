@@ -1,6 +1,7 @@
 let xPos = 0;
 let yPos = 350;
 let xSpeed = 5;
+const speedIncrement = 5;
 
 function setup() {
   createCanvas(1000, 450);
@@ -24,11 +25,27 @@ function draw() {
   line(0, -5, 25, 15);
   pop(); // restore the original transformation matrix
 
-  // Update the position of the figure
+  // Update the position of the figure based on the xSpeed
   xPos += xSpeed;
 
   // If the figure reaches the edge of the canvas, wrap around to the other side
   if (xPos > width) {
     xPos = -25;
+  } else if (xPos < -25) {
+    xPos = width;
+  }
+}
+
+function keyPressed() {
+  if (keyCode === RIGHT_ARROW) {
+    xSpeed += speedIncrement;
+  } else if (keyCode === LEFT_ARROW) {
+    xSpeed -= speedIncrement;
+  }
+}
+
+function keyReleased() {
+  if (keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW) {
+    xSpeed = 0;
   }
 }
