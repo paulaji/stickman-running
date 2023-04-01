@@ -6,8 +6,12 @@ let isJumping = false;
 const speedIncrement = 5;
 const jumpHeight = 50;
 
+let bush1 = { x: 250, y: 420, size: 35 };
+let bush2 = { x: 500, y: 420, size: 30 };
+let bush3 = { x: 750, y: 420, size: 40 };
+
 function setup() {
-  createCanvas(1000, 450);
+  createCanvas(1000, 500);
 }
 
 function draw() {
@@ -23,6 +27,13 @@ function draw() {
       isJumping = false;
     }
   }
+
+  // Draw the bushes
+  fill(0, 200, 0);
+  noStroke();
+  ellipse(bush1.x, bush1.y, bush1.size, bush1.size);
+  ellipse(bush2.x, bush2.y, bush2.size, bush2.size);
+  ellipse(bush3.x, bush3.y, bush3.size, bush3.size);
 
   // Draw the running figure
   fill(255, 0, 0);
