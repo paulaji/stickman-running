@@ -1,7 +1,10 @@
 let xPos = 0;
 let yPos = 350;
 let xSpeed = 5;
+let ySpeed = 0;
+let isJumping = false;
 const speedIncrement = 5;
+const jumpHeight = 50;
 
 function setup() {
   createCanvas(1000, 450);
@@ -9,6 +12,17 @@ function setup() {
 
 function draw() {
   background(220);
+
+  // Check if the figure is jumping
+  if (isJumping) {
+    yPos += ySpeed;
+    ySpeed++;
+    if (yPos >= 350) {
+      ySpeed = 0;
+      yPos = 350;
+      isJumping = false;
+    }
+  }
 
   // Draw the running figure
   fill(255, 0, 0);
@@ -41,11 +55,17 @@ function keyPressed() {
     xSpeed += speedIncrement;
   } else if (keyCode === LEFT_ARROW) {
     xSpeed -= speedIncrement;
+  } else if (keyCode === UP_ARROW && !isJumping) {
+    isJumping = true;
+    ySpeed = -10;
   }
 }
 
 function keyReleased() {
   if (keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW) {
     xSpeed = 0;
+  } else if (keyCode === UP_ARROW && isJumping) {
+    // If the character is jumping and the up arrow is released, stop the jump
+    ySpeed = 0;
   }
 }
